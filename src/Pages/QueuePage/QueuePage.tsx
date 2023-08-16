@@ -1,58 +1,44 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Typography, Grid } from "@mui/material";
 
-import {
-  QueuePageProps,
-  YourPositionInTheQueue,
-  socket,
-} from "./queuePageUtils";
-import { Container, Typography } from "@mui/material";
+import useQueueUpdate from "../../hooks/QueuPage/useQueuUpdate";
+import useLeaveQueueBeforeUnload from "../../hooks/QueuPage/useLeaveQueueBeforeUnload";
 
-const QueuePage: FC<QueuePageProps> = ({ playerEmail }) => {
+const QueuePage: FC<{ playerEmail: string }> = ({ playerEmail }) => {
   const [queue, setQueue] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    socket.on("updateQueue", (updatedQueue: string[]) => {
-      setQueue(updatedQueue);
-
-      if (updatedQueue[0] === playerEmail) {
-        navigate("/game");
-      }
-    });
-
-    socket.emit("joinQueue", "player's email");
-
-    return () => {
-      socket.off("updateQueue");
-    };
-  }, [navigate, playerEmail]);
+  useQueueUpdate(playerEmail, setQueue, navigate);
+  useLeaveQueueBeforeUnload();
 
   return (
-    // <div>
-    //   <h1>Your position in the queue: {queue.indexOf(playerEmail) + 1}</h1>
-    // </div>
-
     <Container>
-      <div
-        style={{
-          margin: "50px",
-          display: "flex",
-          flexDirection: "column",
-          justifyItems: "center",
-        }}
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        style={{ height: "100vh" }}
       >
-        <YourPositionInTheQueue />
-        <div
-          style={{
-            margin: "50px",
-          }}
-        >
-          <Typography align="center" variant="h1">
-            {queue.indexOf(playerEmail) + 1}
+        <Grid item>
+          <Typography align="center" variant="h6">
+            almost there!
           </Typography>
-        </div>
-      </div>
+        </Grid>
+        <Grid item>
+          <Typography align="center" variant="h4">
+            Your position in the queue
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography align="center" variant="h1" sx={{ fontSize: "25rem" }}>
+            {Array.isArray(queue)
+              ? queue.indexOf(playerEmail) + 1
+              : "Loading..."}
+          </Typography>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

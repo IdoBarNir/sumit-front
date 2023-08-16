@@ -1,19 +1,25 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Grid } from "@mui/material";
 
 import {
-  BinaryCocktail,
-  EnterEmailToPlay,
   WelcomePageProps,
-  WelcomeTo,
   handleSubmit,
   validateEmailInput,
 } from "./welcomePageUtils";
-import { Container } from "@mui/material";
 import LetsGoButton from "../../components/WelcomePage/LetsGoButton";
 import EmailInput from "../../components/WelcomePage/EmailInput";
+import {
+  BinaryCocktail,
+  EnterEmailToPlay,
+  WelcomeTo,
+} from "../../components/WelcomePage/Typographies";
 
-const WelcomePage: FC<WelcomePageProps> = ({ playerEmail, setPlayerEmail }) => {
+const WelcomePage: FC<WelcomePageProps> = ({
+  playerEmail,
+  setPlayerEmail,
+  onCompletion,
+}) => {
   const navigate = useNavigate();
 
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -24,59 +30,51 @@ const WelcomePage: FC<WelcomePageProps> = ({ playerEmail, setPlayerEmail }) => {
 
   return (
     <Container>
-      <div
-        style={{
-          margin: "50px",
-          display: "flex",
-          flexDirection: "column",
-          justifyItems: "center",
-        }}
+      <Grid
+        container
+        direction="column"
+        justifyContent="space-evenly"
+        alignItems="center"
+        spacing={2}
+        style={{ height: "100vh", width: "100vw" }}
       >
-        <WelcomeTo />
-        <BinaryCocktail />
-        <div
-          style={{
-            marginTop: "20px",
-            display: "flex",
-            flexDirection: "column",
-            justifyItems: "center",
-          }}
+        <Grid
+          container
+          direction="column"
+          justifyContent="space-evenly"
+          alignItems="center"
+          spacing={2}
+        >
+          <WelcomeTo />
+          <BinaryCocktail />
+        </Grid>
+        <Grid
+          container
+          direction="column"
+          justifyContent="space-evenly"
+          alignItems="center"
+          style={{ padding: "5vw" }}
         >
           <EnterEmailToPlay />
-          <div
-            style={{
-              marginTop: "5px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <EmailInput
-              isEmailValid={isEmailValid}
-              email={playerEmail}
-              setEmail={setPlayerEmail}
-            />
-          </div>
-        </div>
 
-        <div
-          style={{
-            marginTop: "30px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-          }}
-        >
+          <EmailInput
+            isEmailValid={isEmailValid}
+            email={playerEmail}
+            setEmail={setPlayerEmail}
+          />
+        </Grid>
+        <Grid item style={{ width: "85vw", height: "20vh", padding: 0 }}>
           <LetsGoButton
             onSubmit={() =>
               handleSubmit({
                 navigate,
                 playerEmail,
+                onCompletion,
               })
             }
           />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

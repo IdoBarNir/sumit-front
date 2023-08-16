@@ -10,6 +10,7 @@ type EmailInputProps = {
 const EmailInput: FC<EmailInputProps> = ({ isEmailValid, email, setEmail }) => {
   return (
     <TextField
+      fullWidth
       error={!isEmailValid}
       value={email}
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
