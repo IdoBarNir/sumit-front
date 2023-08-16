@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { QuestionType } from "../types/common";
 
-export const BACKEND_URL = "http://localhost:3001";
+export const BACKEND_URL = "https://sumit-back.onrender.com";
 export const socket = io(BACKEND_URL);
 
 export const registerEmail = async (email: string) => {
