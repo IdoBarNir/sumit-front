@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 
 import { useDrag } from "../../../hooks/GamePage/useDrag";
-import CocktailGlass from "src/svg/CocktailGlass.svg";
+import CocktailGlass from "../../../svg/CocktailGlass.svg?url";
 import { GlassProps } from "./glassUtils";
 
 const Glass: FC<GlassProps> = ({ position, setPosition, dragDirection }) => {
