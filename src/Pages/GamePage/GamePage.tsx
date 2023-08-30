@@ -151,7 +151,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
           <Glass role="left" position={glassPositions} />
           <Glass role="right" position={glassPositions} />
         </Grid>
-        <Typography variant="h6">Fill the glass without spilling</Typography>
+        <Typography variant="h6">Fill without spilling</Typography>
         <Grid container justifyContent="space-evenly" style={{ width: "100%" }}>
           <Shaker
             label="A"
