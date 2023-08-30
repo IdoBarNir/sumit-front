@@ -151,9 +151,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
           <Glass role="left" position={glassPositions} />
           <Glass role="right" position={glassPositions} />
         </Grid>
-        <Grid item>
-          <Typography variant="h6">Fill the glass without spilling</Typography>
-        </Grid>
+        <Typography variant="h6">Fill the glass without spilling</Typography>
         <Grid container justifyContent="space-evenly" style={{ width: "100%" }}>
           <Shaker
             label="A"
@@ -192,7 +190,6 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
         ) : (
           <CircularProgress style={{ margin: 40 }} />
         )}
-
         <Grid item>
           <Typography variant="body2" color="error">
             {error}
