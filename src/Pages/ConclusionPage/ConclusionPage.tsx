@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { Grid } from "@mui/material";
 
 import {
@@ -7,9 +7,14 @@ import {
   FullHeightContainer,
 } from "./conclusionPageUtils";
 import useBackButtonRedirect from "../../hooks/useBackButtonRedirect";
+import Fireworks, { FireworksHandlers } from "@fireworks-js/react";
 
-const ConclusionPage: FC<ConclusionPageProps> = ({ conclusion }) => {
+const ConclusionPage: FC<ConclusionPageProps> = ({
+  conclusion,
+  isWin = false,
+}) => {
   useBackButtonRedirect();
+  const fireworksRef = useRef<FireworksHandlers>(null);
 
   return (
     <FullHeightContainer>
@@ -18,6 +23,19 @@ const ConclusionPage: FC<ConclusionPageProps> = ({ conclusion }) => {
           <ConclusionWrapper variant="h1">{conclusion}</ConclusionWrapper>
         </Grid>
       </Grid>
+      {isWin && (
+        <Fireworks
+          ref={fireworksRef}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 0,
+          }}
+        />
+      )}
     </FullHeightContainer>
   );
 };

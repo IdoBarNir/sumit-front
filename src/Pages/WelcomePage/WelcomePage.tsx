@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 
 import {
   WelcomePageProps,
@@ -22,7 +22,8 @@ const WelcomePage: FC<WelcomePageProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   useEffect(() => {
     validateEmailInput({ email: playerEmail, setIsEmailValid });
@@ -63,17 +64,23 @@ const WelcomePage: FC<WelcomePageProps> = ({
             setEmail={setPlayerEmail}
           />
         </Grid>
-        <Grid item style={{ width: "85vw", height: "20vh", padding: 0 }}>
-          <LetsGoButton
-            onSubmit={() =>
-              handleSubmit({
-                navigate,
-                playerEmail,
-                onCompletion,
-              })
-            }
-          />
-        </Grid>
+        {!isLoading ? (
+          <Grid item style={{ width: "85vw", height: "20vh", padding: 0 }}>
+            <LetsGoButton
+              disabled={!isEmailValid}
+              onSubmit={() => {
+                setIsLoading(true);
+                handleSubmit({
+                  navigate,
+                  playerEmail,
+                  onCompletion,
+                });
+              }}
+            />
+          </Grid>
+        ) : (
+          <CircularProgress style={{ margin: 40 }} />
+        )}
       </Grid>
     </Container>
   );

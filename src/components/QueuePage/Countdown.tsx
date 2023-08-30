@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 import { FC, memo } from "react";
 
-interface CountdownProps {
+type CountdownProps = {
   timeLeft: number | null;
-}
+};
 
 const Countdown: FC<CountdownProps> = ({ timeLeft }) => {
   return (

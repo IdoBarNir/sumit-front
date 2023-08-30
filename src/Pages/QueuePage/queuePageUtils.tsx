@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Typography } from "@mui/material";
 
-export interface QueuePageProps {
+export type QueuePageProps = {
   playerEmail: string;
-}
+};
 
 export const YourPositionInTheQueue: FC = () => {
   return (

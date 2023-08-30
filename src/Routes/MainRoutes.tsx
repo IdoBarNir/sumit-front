@@ -11,6 +11,7 @@ import ConclusionPage from "../Pages/ConclusionPage/ConclusionPage";
 
 const MainRoutes: FC = () => {
   const [playerEmail, setPlayerEmail] = useState("");
+  const [isWin, setIsWin] = useState(false);
   const [conclusion, setConclusion] = useState("");
 
   const { setHasNavigatedFromWelcome } = useNavigationContext();
@@ -41,13 +42,19 @@ const MainRoutes: FC = () => {
       <Route
         path="/game"
         element={
-          <GuardedRoute element={<GamePage setConclusion={setConclusion} />} />
+          <GuardedRoute
+            element={
+              <GamePage setConclusion={setConclusion} setIsWin={setIsWin} />
+            }
+          />
         }
       />
       <Route
         path="/conclusion"
         element={
-          <GuardedRoute element={<ConclusionPage conclusion={conclusion} />} />
+          <GuardedRoute
+            element={<ConclusionPage conclusion={conclusion} isWin={isWin} />}
+          />
         }
       />
     </Routes>

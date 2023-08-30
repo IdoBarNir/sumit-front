@@ -1,8 +1,9 @@
 import { Container, Typography, styled } from "@mui/material";
 
-export interface ConclusionPageProps {
+export type ConclusionPageProps = {
   conclusion: string;
-}
+  isWin: boolean;
+};
 
 export const ConclusionWrapper = styled(Typography)({
   wordWrap: "break-word",

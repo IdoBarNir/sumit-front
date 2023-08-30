@@ -2,9 +2,9 @@ import { FC } from "react";
 import { Navigate } from "react-router-dom";
 import { useNavigationContext } from "../components/NavigationContext/NavigationContext";
 
-interface GuardedRouteProps {
+type GuardedRouteProps = {
   element: React.ReactNode;
-}
+};
 
 const GuardedRoute: FC<GuardedRouteProps> = ({ element }) => {
   const { hasNavigatedFromWelcome } = useNavigationContext();

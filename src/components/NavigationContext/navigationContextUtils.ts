@@ -1,14 +1,14 @@
 import { ReactNode, createContext } from "react";
 
-export interface NavigationContextType {
+export type NavigationContextType = {
   hasNavigatedFromWelcome: boolean;
   setHasNavigatedFromWelcome: (value: boolean) => void;
-}
+};
 
 export const NavigationContext = createContext<
   NavigationContextType | undefined
 >(undefined);
 
-export interface NavigationProviderProps {
+export type NavigationProviderProps = {
   children: ReactNode;
-}
+};

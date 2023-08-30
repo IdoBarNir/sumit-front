@@ -1,10 +1,9 @@
 import { MouseEvent, TouchEvent } from "react";
 
-export interface GlassProps {
-  position: number;
-  setPosition: (pos: number) => void;
-  dragDirection: "left" | "right";
-}
+export type GlassProps = {
+  position: { right: number; left: number };
+  role: "right" | "left";
+};
 
 export const handleDragStart =
   (

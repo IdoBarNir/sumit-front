@@ -1,25 +1,36 @@
 import { FC } from "react";
+import IconButton from "@mui/material/IconButton";
 import ShakerSVG from "../../svg/ShakerSVG";
 
-interface ShakerProps {
+type ShakerProps = {
   label: string;
   highlight: boolean;
-}
+  onClick: () => void;
+};
 
-const Shaker: FC<ShakerProps> = ({ label, highlight }) => {
+const Shaker: FC<ShakerProps> = ({ label, highlight, onClick }) => {
   return (
-    <div
+    <IconButton
+      onClick={onClick}
       style={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         width: "30vw",
         height: "15vh",
+        backgroundColor: highlight ? "#00FF00" : "#EE4B2B",
+        position: "relative",
       }}
+      color="inherit"
     >
-      <ShakerSVG label={label} fill={highlight ? "#00FF00" : "#000000"} />
-    </div>
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <ShakerSVG label={label} fill="#000000" />
+      </div>
+    </IconButton>
   );
 };
 

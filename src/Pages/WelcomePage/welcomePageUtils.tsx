@@ -3,11 +3,11 @@ import { Dispatch, SetStateAction } from "react";
 import { ApiResponse } from "../../types/common";
 import { registerEmail } from "../../api/api";
 
-export interface WelcomePageProps {
+export type WelcomePageProps = {
   playerEmail: string;
   setPlayerEmail: Dispatch<SetStateAction<string>>;
   onCompletion: () => void;
-}
+};
 
 export const handleSubmit = async ({
   navigate,
@@ -43,6 +43,6 @@ export const validateEmailInput = ({
   setIsEmailValid: Dispatch<SetStateAction<boolean>>;
 }) => {
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  const isEmailValid = emailPattern.test(email) || !email;
+  const isEmailValid = emailPattern.test(email);
   setIsEmailValid(isEmailValid);
 };
