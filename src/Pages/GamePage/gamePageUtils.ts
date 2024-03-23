@@ -15,7 +15,7 @@ export type HighlightedShakers = {
   C: boolean;
 };
 
-export const TIME_TO_ANSWER = 100;
+export const TIME_TO_ANSWER = 300;
 
 export const handleSubmit = ({
   question,
