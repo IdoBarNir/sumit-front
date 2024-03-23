@@ -105,21 +105,23 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
   }, []);
 
   useEffect(() => {
-    onGameResult((result) => {
-      console.log("game result received: ", result);
-      if (result === "WIN") {
-        setConclusion("Bravo! You Win!");
-        setIsWin(true);
-      } else if (result === "LOSE") {
-        setConclusion("Try Again...");
-      }
-      navigate("/conclusion");
-    });
+    if (isLoading) {
+      onGameResult((result) => {
+        console.log("game result received: ", result);
+        if (result === "WIN") {
+          setConclusion("Bravo! You Win!");
+          setIsWin(true);
+        } else if (result === "LOSE") {
+          setConclusion("Try Again...");
+        }
+        navigate("/conclusion");
+      });
 
-    return () => {
-      turnGameResultOff();
-    };
-  }, [navigate, setConclusion, setIsWin]);
+      return () => {
+        turnGameResultOff();
+      };
+    }
+  }, [navigate, setConclusion, setIsWin, isLoading]);
 
   const handleShakerClick = (shakerLabel: keyof HighlightedShakers) => {
     setHighlightedShakers((prevShakers) => {
