@@ -7,13 +7,15 @@ export type GamePageProps = {
   setIsWin: Dispatch<SetStateAction<boolean>>;
 };
 
+export type ShakerLetter = "A" | "B" | "C";
+
 export type HighlightedShakers = {
   A: boolean;
   B: boolean;
   C: boolean;
 };
 
-export const TIME_TO_ANSWER = 100;
+export const TIME_TO_ANSWER = 300;
 
 export const handleSubmit = ({
   question,
@@ -34,6 +36,13 @@ export const handleSubmit = ({
   }
 };
 
-export const generateAnswer = (highlightedCount: number) => {
-  return highlightedCount.toString();
+export const generateAnswer = (highlightedShakers: HighlightedShakers) => {
+  {
+    const answerLetters = Object.keys(highlightedShakers) as ShakerLetter[];
+    const answerString = answerLetters
+      .filter((key: ShakerLetter) => highlightedShakers[key])
+      .join("");
+
+    return answerString;
+  }
 };
