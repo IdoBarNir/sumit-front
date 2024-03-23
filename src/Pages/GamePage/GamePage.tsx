@@ -58,6 +58,8 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
   useBackButtonRedirect();
 
   useBeforeUnload(() => {
+    console.log("useBeforeUnload");
+
     leaveQueue();
   });
 
@@ -105,6 +107,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
         setConclusion("Try Again...");
       }
       navigate("/conclusion");
+      leaveQueue();
     });
 
     return () => {

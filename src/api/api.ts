@@ -58,7 +58,6 @@ export const onReceiveQuestion = (
 export const onGameResult = (callback: (result: string) => void) => {
   socket.on("gameResult", callback);
   console.log("game result received");
-  leaveQueue();
 };
 
 export const onDisconnect = (callback: () => void) => {
