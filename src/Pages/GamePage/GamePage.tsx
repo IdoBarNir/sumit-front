@@ -108,7 +108,6 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
         setConclusion("Try Again...");
       }
       navigate("/conclusion");
-      leaveQueue();
     });
 
     return () => {

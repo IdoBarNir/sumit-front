@@ -11,6 +11,8 @@ const useBackButtonRedirect = () => {
 
     const handleBackButtonEvent = (e: PopStateEvent) => {
       e.preventDefault();
+      console.log("Back button clicked");
+
       leaveQueue();
       navigate("/");
     };

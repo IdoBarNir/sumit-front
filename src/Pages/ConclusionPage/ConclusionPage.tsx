@@ -8,6 +8,7 @@ import {
 } from "./conclusionPageUtils";
 import useBackButtonRedirect from "../../hooks/useBackButtonRedirect";
 import Fireworks, { FireworksHandlers } from "@fireworks-js/react";
+import { leaveQueue } from "../../api/api";
 
 const ConclusionPage: FC<ConclusionPageProps> = ({
   conclusion,
@@ -15,6 +16,8 @@ const ConclusionPage: FC<ConclusionPageProps> = ({
 }) => {
   useBackButtonRedirect();
   const fireworksRef = useRef<FireworksHandlers>(null);
+
+  leaveQueue();
 
   return (
     <FullHeightContainer>
