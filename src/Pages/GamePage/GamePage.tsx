@@ -58,8 +58,6 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
   useBackButtonRedirect();
 
   useBeforeUnload(() => {
-    console.log("useBeforeUnload");
-
     leaveQueue();
   });
 
@@ -107,7 +105,6 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
   useEffect(() => {
     if (isLoading) {
       onGameResult((result) => {
-        console.log("game result received: ", result);
         if (result === "WIN") {
           setConclusion("Bravo! You Win!");
           setIsWin(true);
@@ -124,6 +121,9 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
   }, [navigate, setConclusion, setIsWin, isLoading]);
 
   const handleShakerClick = (shakerLabel: keyof HighlightedShakers) => {
+    if (isLoading) {
+      return;
+    }
     setHighlightedShakers((prevShakers) => {
       const updatedShakers = {
         ...prevShakers,
