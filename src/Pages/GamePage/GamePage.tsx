@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { useBeforeUnload, useNavigate } from "react-router-dom";
+
 import {
   Container,
   Typography,
@@ -35,17 +36,11 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [glassPositions, setGlassPositions] = useState({
     left: 0,
     right: 0,
-  });
-  const [error, setError] = useState("");
-  const [timeLeft, setTimeLeft] = useState<number | null>(null);
-  const [question, setQuestion] = useState<QuestionType>({
-    id: "",
-    questionText: "",
-    answer: "",
-    isMultipleChoice: false,
   });
   const [highlightedShakers, setHighlightedShakers] =
     useState<HighlightedShakers>({
@@ -53,7 +48,12 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
       B: false,
       C: false,
     });
-  const [highlightedCount, setHighlightedCount] = useState(0);
+  const [question, setQuestion] = useState<QuestionType>({
+    id: "",
+    questionText: "",
+    answer: "",
+    isMultipleChoice: false,
+  });
 
   useBackButtonRedirect();
 
@@ -79,7 +79,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
           if (prevTime === 1) {
             handleSubmit({
               question,
-              answer: generateAnswer(highlightedCount),
+              answer: generateAnswer(highlightedShakers),
               setError,
             });
           }
@@ -89,7 +89,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
 
       return () => clearInterval(interval);
     }
-  }, [highlightedCount, question]);
+  }, [highlightedShakers, question]);
 
   useEffect(() => {
     requestQuestion();
@@ -98,6 +98,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
     });
 
     onGameResult((result) => {
+      console.log("game result received: ", result);
       if (result === "WIN") {
         setConclusion("Bravo! You Win!");
         setIsWin(true);
@@ -119,8 +120,6 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
         ...prevShakers,
         [shakerLabel]: !prevShakers[shakerLabel],
       };
-      const newCount = Object.values(updatedShakers).filter(Boolean).length;
-      setHighlightedCount(newCount);
       return updatedShakers;
     });
   };
@@ -178,7 +177,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
                 setIsLoading(true);
                 handleSubmit({
                   question,
-                  answer: generateAnswer(highlightedCount),
+                  answer: generateAnswer(highlightedShakers),
                   setError,
                 });
               }}
