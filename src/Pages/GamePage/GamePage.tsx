@@ -99,6 +99,12 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
       setQuestion(receivedQuestion);
     });
 
+    return () => {
+      turnReceiveQuestionOff();
+    };
+  }, []);
+
+  useEffect(() => {
     onGameResult((result) => {
       console.log("game result received: ", result);
       if (result === "WIN") {
@@ -111,7 +117,6 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
     });
 
     return () => {
-      turnReceiveQuestionOff();
       turnGameResultOff();
     };
   }, [navigate, setConclusion, setIsWin]);

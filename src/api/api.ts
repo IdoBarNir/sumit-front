@@ -62,7 +62,7 @@ export const onReceiveQuestion = (
 
 export const onGameResult = (callback: (result: string) => void) => {
   socket.on("gameResult", callback);
-  console.log("game result received");
+  console.log("onGameResult");
 };
 
 export const onDisconnect = (callback: () => void) => {
