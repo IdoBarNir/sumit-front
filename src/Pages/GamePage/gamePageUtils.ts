@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { QuestionType } from "../../types/common";
-import { leaveQueue, submitAnswer } from "../../api/api";
+import { submitAnswer } from "../../api/api";
 
 export type GamePageProps = {
   setConclusion: Dispatch<SetStateAction<string>>;
@@ -29,7 +29,6 @@ export const handleSubmit = ({
       questionId: question.id,
       answer,
     });
-    leaveQueue();
   } else {
     setError("No question received. Please wait or retry.");
   }
