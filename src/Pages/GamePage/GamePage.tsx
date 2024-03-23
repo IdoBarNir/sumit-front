@@ -98,6 +98,7 @@ const GamePage: FC<GamePageProps> = ({ setConclusion, setIsWin }) => {
     });
 
     onGameResult((result) => {
+      console.log("game result received: ", result);
       if (result === "WIN") {
         setConclusion("Bravo! You Win!");
         setIsWin(true);

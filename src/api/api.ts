@@ -35,46 +35,57 @@ export const toggleGameStatus = async () => {
 
 export const leaveQueue = () => {
   socket.emit("leaveQueue");
+  console.log("left queue");
 };
 
 export const joinQueue = (email: string) => {
   socket.emit("joinQueue", email);
+  console.log("joined queue");
 };
 
 export const requestQuestion = () => {
   socket.emit("requestQuestion");
+  console.log("question requested");
 };
 
 export const submitAnswer = (data: { questionId: string; answer: string }) => {
   socket.emit("submitAnswer", data);
+  console.log("answer submitted: ", data.answer);
 };
 
 export const onReceiveQuestion = (
   callback: (receivedQuestion: QuestionType) => void
 ) => {
   socket.on("receiveQuestion", callback);
+  console.log("question received");
 };
 
 export const onGameResult = (callback: (result: string) => void) => {
   socket.on("gameResult", callback);
+  console.log("game result received");
 };
 
 export const onDisconnect = (callback: () => void) => {
   socket.on("disconnect", callback);
+  console.log("disconnected");
 };
 
 export const onUpdateQueue = (callback: (updatedQueue: string[]) => void) => {
   socket.on("updateQueue", callback);
+  console.log("queue updated");
 };
 
 export const turnReceiveQuestionOff = () => {
   socket.off("receiveQuestion");
+  console.log("turnReceiveQuestionOff");
 };
 
 export const turnGameResultOff = () => {
   socket.off("gameResult");
+  console.log("turnGameResultOff");
 };
 
 export const turnUpdateQueueOff = () => {
   socket.off("updateQueue");
+  console.log("turnUpdateQueueOff");
 };
